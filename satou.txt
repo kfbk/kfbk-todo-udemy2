@@ -1,0 +1,39 @@
+udemy todo2
+
+supabase
+	new-project : note Udemy
+
+nextjs install
+
+	npx create-next-app@12.3.3 todo-app2 --typescript
+	vsCode.terminalにて
+	yarn add next@12.3.3
+	yarn add @heroicons/react	--> yarn add @heroicons/react@v1
+	yarn add @supabase/supabase-js
+	yarn add react-query			状態管理（サーバーステートの管理に必要な機能を提供。useContextと似ている）
+	yarn add zustand
+	yarn add -D tailwindcss postcss autoprefixer
+	yarn add -D prettier prettier-plugin-tailwindcss
+	npx tailwindcss init -p
+
+
+開発モード（通常はこちらで良い）
+	yarn run dev
+プロダクションモード（SSG ISR の挙動を確認するためや、最終確認に使う）
+	yarn build
+	yarn start
+
+ssg,ssr,csr,isr は'react-query'を使わず、直接supabaseにアクセスしていた
+
+仮ユーザ登録
+	user1@test.com	password　123456
+	user2@test.com	password　123456
+	user3@test.com	password　123456
+
+13-----------------------------------------------------------------
+
+Next.js 12.2以降で、ISR pageへのprefetch挙動に変更がありました。
+
+ver 12.1以前 ISR pageへのLink ホバー時にISRが発動
+
+ver 12.2以降  ISR pageへのLink ホバー時にISRが発動せずに、実際にクリックされた時だけISRが発動する。
