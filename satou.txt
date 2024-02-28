@@ -37,3 +37,17 @@ Next.js 12.2以降で、ISR pageへのprefetch挙動に変更がありました。
 ver 12.1以前 ISR pageへのLink ホバー時にISRが発動
 
 ver 12.2以降  ISR pageへのLink ホバー時にISRが発動せずに、実際にクリックされた時だけISRが発動する。
+
+15-----------------------------------------------------------------
+
+VercelのProject Settings -> General -> Node.js Versionで 16.xを選択Saveしてから, Deployするようにしてください。
+
+
+16-----------------------------------------------------------------
+
+	git init
+	git add .
+	git commit -m "first commit"
+	git branch -M main
+	git remote add origin https://github.com/kfbk/todo-udemy.git
+	git push -u origin main
