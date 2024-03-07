@@ -2,7 +2,7 @@ import {supabase} from '../utils/supabase'
 import {useState} from 'react'
 import {useMutation} from 'react-query'
 
-// supabaseへのユーザログイン処理・ユーザ登録処理
+// supabaseへのユーザログイン処理とユーザ登録処理
 export const useMutateAuth = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -10,6 +10,7 @@ export const useMutateAuth = () => {
     setEmail('')
     setPassword('')
   }
+  // ログイン処理
   const loginMutation = useMutation(
     async () => {
       // const { error } = await supabase.auth.signIn({ email, password })  --> satou
@@ -23,6 +24,7 @@ export const useMutateAuth = () => {
       },
     }
   )
+  // 新しくユーザ作成
   const registerMutation = useMutation(
     async () => {
       const { error } = await supabase.auth.signUp({ email, password })

@@ -45,9 +45,24 @@ VercelのProject Settings -> General -> Node.js Versionで 16.xを選択Saveしてから,
 
 16-----------------------------------------------------------------
 
+	デプロイ方法
+	git remote rm origin
 	git init
 	git add .
 	git commit -m "first commit"
 	git branch -M main
-	git remote add origin https://github.com/kfbk/todo-udemy.git
+	git remote add origin https://github.com/kfbk/kfbk-todo-udemy2.git
 	git push -u origin main
+
+	https://kfbk-todo-udemy2.vercel.app/
+
+17-----------------------------------------------------------------
+
+	認証機能（hook/useMutationAuth）
+
+18-----------------------------------------------------------------
+
+	Zustand		：
+	ReadtQuery	：Cacheを作ってデータベースの値を保存する
+
+	CSRを使ったアプリ作成

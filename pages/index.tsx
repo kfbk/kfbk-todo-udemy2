@@ -4,7 +4,7 @@ import type { NextPage } from 'next'
 import {useMutateAuth} from '../hooks/useMutateAuth'
 // import Head from 'next/head'
 // import Image from 'next/image'
-import Layout from '../components/Layout'
+import {Layout} from '../components/Layout'
 
 const Auth: NextPage = () => {
   // 次は、ログインモード（true）か、レジスタモードか
@@ -16,6 +16,8 @@ const Auth: NextPage = () => {
     loginMutation,
     registerMutation,
   } = useMutateAuth()
+  
+  // ボタンを押された時の処理
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (isLogin) {

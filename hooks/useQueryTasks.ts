@@ -2,6 +2,7 @@ import {supabase} from '../utils/supabase'
 import {useQuery} from 'react-query'
 import {Task} from '../types/types'
 
+// Supabaseから一覧を得るためのカスタムフック
 export const useQueryTasks = () => {
   const getTasks = async () => {
     const {data,error} = await supabase

@@ -5,7 +5,7 @@ type Title = {
   title: string
   children: ReactNode
 }
-const Layout: FC<Title> = ({children, title = 'Todo app'}) => {
+export const Layout: FC<Title> = ({children, title = 'Todo app'}) => {
   return (
     // <div className='flex 
     //   items-center justify-center font-mono text-gray-800'
@@ -32,5 +32,3 @@ const Layout: FC<Title> = ({children, title = 'Todo app'}) => {
     </div>
   )
 }
-
-export default Layout

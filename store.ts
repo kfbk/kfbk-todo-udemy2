@@ -11,9 +11,10 @@ type State = {
   resetEditedNotice: () => void
 }
 
+// TaskやNoticeを作成・変更する時に使う
 const useStore = create<State>((set) => ({
-  editedTask: {id: '', title: ''},
-  editedNotice: { id: '', content: ''},
+  editedTask: {id: '', title: ''},        // これが変数
+  editedNotice: { id: '', content: ''},   // これが変数
   updateEditedTask:(payload) => {
     set({
       editedTask: {

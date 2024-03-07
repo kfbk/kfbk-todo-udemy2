@@ -1,6 +1,6 @@
 import {useEffect,useState} from 'react'
 import {NextPage} from 'next'
-import Layout from '../components/Layout'
+import {Layout} from '../components/Layout'
 import {supabase} from '../utils/supabase'
 import {Task, Notice} from '../types/types'
 

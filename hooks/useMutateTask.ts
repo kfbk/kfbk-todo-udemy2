@@ -1,35 +1,42 @@
-import {supabase} from '../utils/supabase'
+import { useQueryClient, useMutation } from 'react-query'
 import useStore from '../store'
-import {useQueryClient, useMutation} from 'react-query'
-import {Task, EditedTask} from '../types/types'
+import { supabase } from '../utils/supabase'
+import { Task, EditedTask } from '../types/types'
 
-export const useMutetdTask = () => {
+// Supabaseへ新規・編集・削除データを書き込む
+export const useMutateTask = () => {
   const queryClient = useQueryClient()
   const reset = useStore((state) => state.resetEditedTask)
+
   const createTaskMutation = useMutation(
-    async (task:Omit<Task,'id' | 'created_at'>) => {
-      const {data,error} = await supabase.from('todos').insert(task)
+    async (task: Omit<Task, 'id' | 'created_at'>) => {
+      const { data, error } = await supabase.from('todos').insert(task)
         .select()       // satou
       if (error) throw new Error(error.message)
       return data
     },
     {
+      // Supbaseに追加出来たら
       onSuccess: (res) => {
-        const previousTodos = queryClient.getQueryData<Task[]>(['todos'])
+        // キャッシュの中から'todo'に紐づいてるデータを得る
+        const previousTodos = queryClient.getQueryData<Task[]>(['todos'])  // satou
+        // キャッシュが存在すれば
         if (previousTodos) {
-          queryClient.setQueryData(['todos'], [...previousTodos, res[0]])
+          // そのデータに作成データを加え更新する
+          queryClient.setQueryData(
+            ['todos'], [...previousTodos, res[0]])
         }
         reset()
       },
-      onError: (err:any) => {
+      onError: (err: any) => {
         alert(err.message)
         reset()
-      }
+      },
     }
   )
   const updateTaskMutation = useMutation(
-    async (task:EditedTask) => {
-      const {data,error} = await supabase.from('todos').update({title: task.title})
+    async (task: EditedTask) => {
+      const { data, error } = await supabase.from('todos').update({ title: task.title })
         .eq('id', task.id)
         .select()       // satou
       if (error) throw new Error(error.message)
@@ -37,26 +44,29 @@ export const useMutetdTask = () => {
     },
     {
       onSuccess: (res, variables) => {
-        const previousTodos = queryClient.getQueryData<Task[]>(['todos'])
+        const previousTodos = queryClient.getQueryData<Task[]>(['todos'])  // satou
         if (previousTodos) {
           queryClient.setQueryData(
-            ['todos'],
-            previousTodos.map((task) => {
+            ['todos'],                      // satou
+            previousTodos.map((task) =>
               task.id === variables.id ? res[0] : task
-            })  
+            )
           )
         }
         reset()
       },
-      onError: (err:any) => {
+      onError: (err: any) => {
         alert(err.message)
         reset()
-      }
+      },
     }
   )
   const deleteTaskMutation = useMutation(
     async (id: string) => {
-      const { data, error } = await supabase.from('todos').delete().eq('id', id)
+      const { data, error } = await supabase
+        .from('todos')
+        .delete()
+        .eq('id', id)
       if (error) throw new Error(error.message)
       return data
     },
